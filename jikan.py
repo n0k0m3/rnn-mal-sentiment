@@ -5,11 +5,14 @@ from time import time, sleep
 import os
 from tqdm import tqdm
 import pandas as pd
+from utils.p5_to_p4 import pickle_protocol
+
+API_URI = "http://localhost:8000/v3"
 
 if not os.path.isfile("mal_id_list_top_500.pkl"):
     mal_id_list = []
 
-    url = "http://localhost:8000/v3/top/anime/{}/bypopularity"
+    url = API_URI+"/top/anime/{}/bypopularity"
     for i in tqdm(range(10)):
         # timeend = time()+4  # Rate Limit
 
@@ -50,7 +53,7 @@ col = ['overall', 'story', 'animation',
 data = pd.DataFrame(data, columns=col)
 num = ['overall', 'story', 'animation', 'sound', 'character', 'enjoyment']
 
-url = "http://localhost:8000/v3/anime/{}/reviews/{}"
+url = API_URI+"/anime/{}/reviews/{}"
 
 
 def bulk():
@@ -89,4 +92,5 @@ try:
 except KeyboardInterrupt:
     raise
 finally:
-    data.to_hdf('data.h5', key='df', mode='w')
+    with pickle_protocol(4):
+        data.to_hdf('data.h5', key='df', mode='w')
