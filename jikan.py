@@ -52,7 +52,7 @@ num = ['overall', 'story','animation','sound','character','enjoyment']
 
 url="https://api.jikan.moe/v3/anime/{}/reviews/{}"
 for mal_id in tqdm(mal_id_list):
-    print("Working on MAL ID:",mal_id)
+    print("\nWorking on MAL ID:",mal_id)
     for i in range(100):
         timeend = time()+4 # Rate Limit
 
@@ -60,7 +60,7 @@ for mal_id in tqdm(mal_id_list):
         reviews = response.json()["reviews"]
         response.close()
 
-        if reviews[0] is None:
+        if reviews==[]:
             break
 
         for r in reviews:
