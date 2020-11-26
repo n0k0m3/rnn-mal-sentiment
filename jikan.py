@@ -11,7 +11,7 @@ if not os.path.isfile("mal_id_list_top_500.pkl"):
 
     url = "http://localhost:8000/v3/top/anime/{}/bypopularity"
     for i in tqdm(range(10)):
-        #timeend = time()+4  # Rate Limit
+        # timeend = time()+4  # Rate Limit
 
         response = requests.get(url.format(str(i+1)))
         results = response.json()["top"]
@@ -46,14 +46,15 @@ with open("mal_id_list_top_500.pkl", "rb") as f:
 """
 data = [[0, 0, 0, 0, 0, 0, "test review"]]
 col = ['overall', 'story', 'animation',
-    'sound', 'character', 'enjoyment', 'review']
+       'sound', 'character', 'enjoyment', 'review']
 data = pd.DataFrame(data, columns=col)
 num = ['overall', 'story', 'animation', 'sound', 'character', 'enjoyment']
 
 url = "http://localhost:8000/v3/anime/{}/reviews/{}"
 
+
 def bulk():
-    global data,col,num,url
+    global data, col, num, url
     for mal_id in tqdm(mal_id_list):
         print("\nWorking on MAL ID:", mal_id)
         for i in range(100):
@@ -82,8 +83,9 @@ def bulk():
             #     sleep(timeend-time()) # Rate Limit
     return data
 
+
 try:
-    data=bulk()
+    data = bulk()
 except KeyboardInterrupt:
     raise
 finally:
