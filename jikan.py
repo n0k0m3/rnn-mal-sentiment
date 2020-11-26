@@ -52,6 +52,7 @@ num = ['overall', 'story','animation','sound','character','enjoyment']
 
 url="https://api.jikan.moe/v3/anime/{}/reviews/{}"
 for mal_id in tqdm(mal_id_list):
+    print("Working on MAL ID:",mal_id)
     for i in range(100):
         timeend = time()+4 # Rate Limit
 
