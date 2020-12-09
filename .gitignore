@@ -2,4 +2,6 @@ token.json
 credentials.json
 *pycache*
 .vscode
-.DS_Store
+.DS_Store*.bin
+*.h5
+*.bin
